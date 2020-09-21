@@ -5,11 +5,6 @@
 
 [node name="World" type="Node2D"]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 2, 2 )
-anchor_mode = 0
-current = true
-
 [node name="Walls" type="Node2D" parent="."]
 
 [node name="Wall" parent="Walls" instance=ExtResource( 2 )]
@@ -17,4 +12,10 @@ current = true
 [node name="Wall2" parent="Walls" instance=ExtResource( 2 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 160, 192 )
+position = Vector2( 160, 80 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2( -48, -64 )
+anchor_mode = 0
+current = true
+zoom = Vector2( 0.5, 0.5 )
