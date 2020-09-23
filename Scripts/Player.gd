@@ -9,6 +9,8 @@ onready var animationPlayer = $AnimationPlayer
 
 var velocity := Vector2.ZERO
 var roll_vector := Vector2.ZERO
+var right = true
+
 
 func _physics_process(delta: float) -> void:
 	var input_vector = Vector2.ZERO
@@ -18,14 +20,23 @@ func _physics_process(delta: float) -> void:
 
 	if input_vector != Vector2.ZERO:
 		if (animationPlayer.get_current_animation() != "Jump"):
-			animationPlayer.play("Run")
+			if input_vector.x < 0:
+				animationPlayer.play("RunLeft")
+				right = false
+			else:
+				animationPlayer.play("RunRight")
+				right = true
 			velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
 	else:
 		if (animationPlayer.get_current_animation() != "Jump"):
-			animationPlayer.play("Idle")
+			if right == true:
+				animationPlayer.play("IdleRight")
+			else:
+				animationPlayer.play("IdleLeft")
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 	
 	velocity = move_and_slide(velocity)
+	
 	
 	if Input.is_action_just_pressed("Jump"):
 		animationPlayer.play("Jump")
